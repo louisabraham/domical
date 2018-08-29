@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>OCaml - iodide</title>
+<link rel="stylesheet" type="text/css" href="https://iodide-project.github.io/dist/iodide.pyodide-20180420.css">
+</head>
+<body>
+<script id="jsmd" type="text/jsmd">
+%% meta
+{
+  "title": "OCaml",
+  "lastSaved": "2018-08-29T14:35:09.327Z",
+  "languages": {
+    "js": {
+      "pluginType": "language",
+      "languageId": "js",
+      "displayName": "Javascript",
+      "codeMirrorMode": "javascript",
+      "module": "window",
+      "evaluator": "eval",
+      "keybinding": "j",
+      "url": ""
+    },
+    "py": {
+      "languageId": "py",
+      "displayName": "python",
+      "codeMirrorMode": "python",
+      "keybinding": "p",
+      "url": "https://iodide.io/pyodide-demo/pyodide.js",
+      "module": "pyodide",
+      "evaluator": "runPython",
+      "pluginType": "language"
+    },
+    "ml": {
+      "languageId": "ml",
+      "displayName": "ocaml",
+      "codeMirrorMode": "mllike",
+      "keybinding": "o",
+      "url": "eval.js",
+      "module": "evaluator",
+      "evaluator": "execute",
+      "pluginType": "language"
+    }
+  },
+  "lastExport": "2018-08-29T14:35:09.797Z"
+}
+
+%% md
+# Domical 🐪
+
+Domical (anagram of iodcaml) adds support for OCaml in an Iodide notebook, running inside your browser.
+
+**This is early days.  Everything here is subject to change.**
+
+(A major shortcoming is that `printf` and stderr from OCaml currently print to the Javascript debugger console, rather than to the notebook cell, so some of these examples are more contrived than they need to be.)
+
+**Also to note: If you have any issues, try disabling any ad or tracking blockers for this site.**
+
+First, let's use a plugin cell to load the OCaml interpreter and tell Iodide about the new cell type.
+
+%% plugin
+{
+  "languageId": "ml",
+  "displayName": "ocaml",
+  "codeMirrorMode": "mllike",
+  "keybinding": "o",
+  "url": "eval.js",
+  "module": "evaluator",
+  "evaluator": "execute",
+  "pluginType": "language"
+}
+
+%% md
+## Make a OCaml cell.  Import stuff and use it.
+
+Most of the standard library (at least the parts that make sense) are here and available to use.
+
+%% code {"language":"ml"}
+open Printf
+let my_data = [ "a"; "beautiful"; "day" ]
+let () = List.iter (fun s -> printf "%s\n" s) my_data;;
+
+%% code {"language":"ml"}
+let square x = x * x;;
+square 3;;
+
+%% code {"language":"ml"}
+let rec fact x =
+    if x <= 1 then 1 else x * fact (x - 1);;
+fact 5;;
+</script>
+<div id='page'></div>
+<script src='https://iodide-project.github.io/dist/iodide.pyodide-20180420.js'></script>
+</body>
+</html>

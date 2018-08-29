@@ -1,0 +1,20 @@
+B /Users/louisabraham/.opam/4.04.2/lib/biniou
+B /Users/louisabraham/.opam/4.04.2/lib/bytes
+B /Users/louisabraham/.opam/4.04.2/lib/easy-format
+B /Users/louisabraham/.opam/4.04.2/lib/js_of_ocaml
+B /Users/louisabraham/.opam/4.04.2/lib/js_of_ocaml-compiler
+B /Users/louisabraham/.opam/4.04.2/lib/ocaml/compiler-libs
+B /Users/louisabraham/.opam/4.04.2/lib/uchar
+B /Users/louisabraham/.opam/4.04.2/lib/yojson
+B ../_build/default/lib/.js_of_ocaml_toplevel.objs
+S /Users/louisabraham/.opam/4.04.2/lib/biniou
+S /Users/louisabraham/.opam/4.04.2/lib/bytes
+S /Users/louisabraham/.opam/4.04.2/lib/easy-format
+S /Users/louisabraham/.opam/4.04.2/lib/js_of_ocaml
+S /Users/louisabraham/.opam/4.04.2/lib/js_of_ocaml-compiler
+S /Users/louisabraham/.opam/4.04.2/lib/ocaml/compiler-libs
+S /Users/louisabraham/.opam/4.04.2/lib/uchar
+S /Users/louisabraham/.opam/4.04.2/lib/yojson
+S .
+FLG -ppx '/Users/louisabraham/domical/toplevel/_build/default/.ppx/jbuild/js_of_ocaml-ppx/ppx.exe --as-ppx --cookie '\''library-name="js_of_ocaml_toplevel"'\'''
+FLG -w -40
