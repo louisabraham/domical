@@ -2,87 +2,31 @@ let () =
   JsooTop.initialize ()
 
 
+let print_to_element name s : unit =
+  let window = Dom_html.window in
+  let iodide_output = Js.Unsafe.get (Js.Unsafe.get window "iodide") "output" in
+  let el = Js.Unsafe.meth_call iodide_output "element"
+      [| Js.Unsafe.inject (Js.string name) |] in
+  Js.Unsafe.set el "innerText" s; ()
+
+
+let () = begin
+  Sys_js.set_channel_flusher stdout (print_to_element "stdout");
+  Sys_js.set_channel_flusher stderr (print_to_element "stderr")
+end
+
 
 let execute code =
-  let open Js_of_ocaml in
-  let code = Js.to_string code in
-  let buffer = Buffer.create 1000 in
+  let code = String.concat "" [Js.to_string code ; ";;"]  in
+  let buffer = Buffer.create 100 in
   let formatter = Format.formatter_of_buffer buffer in
-  let format = Format.fprintf formatter "%s@."  in
-  begin
-    Sys_js.set_channel_flusher stdout format;
-    Sys_js.set_channel_flusher stderr format;
-    JsooTop.execute true formatter code
-  end;
-  let ans = Js.string (Buffer.contents buffer) in
-  let window = Dom_html.window in
-  let console = Js.Unsafe.get window "console" in
-  let _ = Js.Unsafe.meth_call console "log" [| Js.Unsafe.inject ans |] in
-  ans
+  JsooTop.execute true formatter code;
+  let ans = Buffer.contents buffer in
+  print_to_element "eval" ans; Js.undefined
 
 
 let () =
-  Js_of_ocaml.Js.export "evaluator" (
+  Js.export "evaluator" (
     object%js
       val execute = execute
     end)
-
-
-(* let window = Dom_html.window in *)
-(* let open Js_of_ocaml.Js in *)
-(* let iodide_output = Unsafe.get (Unsafe.get window "iodide") "output" in *)
-(* let console = Unsafe.get window "console" in *)
-
-
-(* let _ = Unsafe.meth_call iodide_output "text" [| Unsafe.inject (Js_of_ocaml.Js.string "coucou") |] in *)
-
-(* let _ = Unsafe.meth_call console "log" [| Unsafe.inject (Js_of_ocaml.Js.string "coucou") |] in *)
-(* let _ = Unsafe.eval_string "console.log(window.iodide)" in *)
-
-
-(* let append_string output cl s =
-   let open Js_of_ocaml in
-   let d = Dom_html.window##.document in
-   let span = Dom_html.createDiv d in
-   span##.classList##add (Js.string cl);
-   Dom.appendChild span (d##createTextNode (Js.string s));
-   Dom.appendChild output span *)
-
-(* let configure o chan attr default =
-   let open Js_of_ocaml in
-   try
-    let v = o##getAttribute(Js.string attr) in
-    match Js.Opt.to_option v with
-    | None -> raise Not_found
-    | Some id ->
-      let dom = Dom_html.getElementById (Js.to_string id) in
-      Sys_js.set_channel_flusher chan (append_string dom attr)
-   with Not_found -> Sys_js.set_channel_flusher chan default *)
-
-
-(* let () =
-   let open Js_of_ocaml in
-   let toploop_ = open_out "/dev/null" in
-   let toploop_ppf = Format.formatter_of_out_channel toploop_ in
-   JsooTop.initialize ();
-   let scripts = Dom_html.window##.document##getElementsByTagName(Js.string "script") in
-   let default_stdout = Format.printf  "%s@." in
-   let default_stderr = Format.eprintf "%s@." in
-   let default_toploop x = Format.eprintf "%s@." x in
-   for i = 0 to scripts##.length - 1 do
-    let item_opt = scripts##item i in
-    let elt_opt = Js.Opt.bind item_opt Dom_html.CoerceTo.element in
-    match Dom_html.opt_tagged elt_opt with
-    | Some (Dom_html.Script script) ->
-      if script##._type = Js.string "text/ocaml"
-      then begin
-        let txt = Js.to_string script##.text in
-        configure script stdout "stdout" default_stdout;
-        configure script stderr "stderr" default_stderr;
-        configure script toploop_ "toploop" default_toploop;
-        let _ret = JsooTop.use toploop_ppf txt in
-        ()
-      end
-      else ()
-    | _ -> ()
-   done *)

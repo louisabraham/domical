@@ -1,0 +1,26 @@
+stderr {
+  display: block;
+  unicode-bidi: embed;
+  font-family: monospace;
+  white-space: pre;  
+  background: #fff1f4;
+  color: #a41c1c;
+  overflow-x: auto;
+}
+
+stdout {
+  display: block;
+  unicode-bidi: embed;
+  font-family: monospace;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+eval {
+  display: block;
+  unicode-bidi: embed;
+  font-family: monospace;
+  white-space: pre;
+  color: #999999;
+}
+
