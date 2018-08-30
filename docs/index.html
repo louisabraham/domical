@@ -99,6 +99,8 @@ fact 5
 Let's solve [World's hardest sudoku](https://www.telegraph.co.uk/news/science/science-news/9359579/Worlds-hardest-sudoku-can-you-crack-it.html) with the [code from the OCaml tutorial](https://ocaml.org/learn/tutorials/99problems.html#97-Sudoku-medium)
 
 %% code {"language":"ml"}
+open Printf
+
 module Board = struct
   type t = int array (* 9×9, row-major representation.  A value of 0
                         means undecided. *)
@@ -201,7 +203,7 @@ Try the code above in the `ocaml` interpreter, on my machine it is more than twi
 
 You can see the Github repository of Domical [here](http://github.com/louisabraham/domical).
 
-To learn more about iodide books, look at their [website](https://iodide.io/).
+To learn more about iodide notebooks, look at their [website](https://iodide.io/).
 
 </script>
 <div id='page'></div>
