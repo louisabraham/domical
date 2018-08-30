@@ -16,5 +16,5 @@ S /Users/louisabraham/.opam/4.04.2/lib/ocaml/compiler-libs
 S /Users/louisabraham/.opam/4.04.2/lib/uchar
 S /Users/louisabraham/.opam/4.04.2/lib/yojson
 S .
-FLG -ppx '/Users/louisabraham/domical/toplevel/_build/default/.ppx/jbuild/js_of_ocaml-ppx/ppx.exe --as-ppx --cookie '\''library-name="js_of_ocaml_toplevel"'\'''
+FLG -ppx '/Users/louisabraham/github/domical/toplevel/_build/default/.ppx/jbuild/js_of_ocaml-ppx/ppx.exe --as-ppx --cookie '\''library-name="js_of_ocaml_toplevel"'\'''
 FLG -w -40
