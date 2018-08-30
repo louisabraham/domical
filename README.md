@@ -39,3 +39,7 @@ need:
 ## Build
 
     make
+
+## TODO
+
+  - add JS bindings to share variables between OCaml and JS
