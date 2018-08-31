@@ -3,11 +3,9 @@ let () =
 
 
 let print_to_element name s : unit =
-  let window = Dom_html.window in
-  let iodide_output = Js.Unsafe.get (Js.Unsafe.get window "iodide") "output" in
-  let el = Js.Unsafe.meth_call iodide_output "element"
-      [| Js.Unsafe.inject (Js.string name) |] in
-  Js.Unsafe.set el "innerText" s; ()
+  let iodide_output = Js.Unsafe.js_expr "window.iodide.output" in
+  let el = iodide_output##element name in
+  el##.innerText := s; ()
 
 
 let () = begin
