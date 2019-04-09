@@ -1,45 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8">
+
+  <link rel="stylesheet" type="text/css" href="/iodide.dev.css">
+  <base target="_blank" rel="noopener noreferrer">
+
   <title>Domical = OCaml + Iodide</title>
-  <link rel="icon" type="image/png" href="http://louisabraham.github.io/domical/favicon.ico">
-  <link rel="stylesheet" type="text/css" href="https://iodide.io/dist/iodide.pyodide-20180623.css">
 </head>
 
 <body>
-  <script id="jsmd" type="text/jsmd">
-%% meta
-{
-  "title": "Domical = OCaml + Iodide",
-  "lastSaved": "2018-08-30T16:42:59.630Z",
-  "languages": {
-    "js": {
-      "pluginType": "language",
-      "languageId": "js",
-      "displayName": "Javascript",
-      "codeMirrorMode": "javascript",
-      "module": "window",
-      "evaluator": "eval",
-      "keybinding": "j",
-      "url": ""
-    },
-    "ml": {
-      "languageId": "ml",
-      "displayName": "ocaml",
-      "codeMirrorMode": "mllike",
-      "keybinding": "o",
-      "url": "eval.js",
-      "module": "evaluator",
-      "evaluator": "execute",
-      "pluginType": "language"
-    }
-  },
-  "lastExport": "2018-08-30T16:44:05.697Z"
-}
 
-%% md
+  <script id="jsmd" type="text/jsmd">%% md
 # Domical 🐪
 
 Domical (anagram of iodcaml) adds support for OCaml in an Iodide notebook, running inside your browser.
@@ -53,35 +25,32 @@ First, let's use a plugin cell to load the OCaml interpreter and tell Iodide abo
 Use the buttons of the menu bar or use Shift+Enter to execute the current cell.
 
 %% plugin
+
 {
   "languageId": "ml",
-  "displayName": "ocaml",
+  "displayName": "OCaml",
   "codeMirrorMode": "mllike",
-  "keybinding": "o",
-  "url": "eval.js",
+  "url": "https://louisabraham.github.io/domical/eval.js",
   "module": "evaluator",
   "evaluator": "execute",
   "pluginType": "language"
 }
-
-%% resource
-style.css
 
 %% md
 ## Make a OCaml cell.  Import stuff and use it.
 
 Most of the standard library are here and available to use.
 
-%% code {"language":"ml"}
+%% ml
 open Printf
 let my_data = [ "a"; "beautiful"; "day" ]
 let () = List.iter (fun s -> printf "%s\n" s) my_data
 
-%% code {"language":"ml"}
+%% ml
 let square x = x * x in
 square 3
 
-%% code {"language":"ml"}
+%% ml
 let rec fact x =
   if x <= 1 then 1 else x * fact (x - 1);;
 fact 5
@@ -91,7 +60,7 @@ fact 5
 
 Let's solve [World's hardest sudoku](https://www.telegraph.co.uk/news/science/science-news/9359579/Worlds-hardest-sudoku-can-you-crack-it.html) with the [code from the OCaml tutorial](https://ocaml.org/learn/tutorials/99problems.html#97-Sudoku-medium)
 
-%% code {"language":"ml"}
+%% ml
 open Printf
 
 module Board = struct
@@ -173,7 +142,7 @@ let time f x =
   Printf.printf "Execution time: %fs\n" (Sys.time() -. t);
   fx
 
-%% code {"language":"ml"}
+%% ml
 let hardest_board =
   Board.of_list [[8; 0; 0; 0; 0; 0; 0; 0; 0];
                  [0; 0; 3; 6; 0; 0; 0; 0; 0];
@@ -196,11 +165,41 @@ Try the code above in the `ocaml` interpreter, on my machine it is more than twi
 
 You can see the Github repository of Domical [here](http://github.com/louisabraham/domical).
 
-To learn more about iodide notebooks, look at their [website](https://iodide.io/).
+To learn more about iodide notebooks, look at their [website](https://iodide.io/).</script>
+  <iframe id="eval-frame" src="https://alpha.iodide.app/iodide.eval-frame.dev.html"
+    sandbox="allow-scripts allow-same-origin allow-popups" allowfullscreen="true" allowvr="yes"></iframe>
+  <script id="userData"
+    type="application/json">{"name": "louisabraham", "avatar": "https://avatars0.githubusercontent.com/u/13174805?v=4"}</script>
+  <script id="notebookInfo"
+    type="application/json">{"username": "louisabraham", "user_can_save": true, "notebook_id": 1627, "revision_id": 12780, "revision_is_latest": true, "connectionMode": "SERVER", "title": "Domical = OCaml + Iodide", "files": [], "forked_from": false}</script>
+  <script src="/iodide.dev.js"></script>
 
-</script>
-  <div id='page'></div>
-  <script src='https://iodide.io/stable/iodide.stable.js'></script>
+  <script>
+    // detecting "do not track" via these instructions:
+    // https://dev.to/corbindavenport/how-to-correctly-check-for-do-not-track-with-javascript-135d
+    if (window.doNotTrack == "1" ||
+      navigator.doNotTrack == "yes" || navigator.doNotTrack == "1" ||
+      navigator.msDoNotTrack == "1" ||
+      ('msTrackingProtectionEnabled' in window.external &&
+        window.external.msTrackingProtectionEnabled())) {
+      // do not track is enabled: disable per google's instructions:
+      // https://developers.google.com/analytics/devguides/collection/gtagjs/user-opt-out
+      window['ga-disable-UA-1648932-8'] = true;
+    }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1648932-8"></script>
+  <script>
+    if (!window['ga-disable-UA-1648932-8']) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+
+      gtag('config', 'UA-1648932-8');
+    } else {
+      console.log('Do not track enabled, google analytics disabled')
+    }
+  </script>
+
 </body>
 
 </html>
