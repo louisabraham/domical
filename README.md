@@ -8,23 +8,17 @@ Demo: <https://louisabraham.github.io/domical/>
 
 In a iodide notebook, add a plugin cell:
 
-``` json
-
-{
-  "languageId": "ml",
-  "displayName": "ocaml",
-  "codeMirrorMode": "mllike",
-  "keybinding": "o",
-  "url": "https://louisabraham.github.io/domical/eval.js",
-  "module": "evaluator",
-  "evaluator": "execute",
-  "pluginType": "language"
-}
-```
-
-and an external resource cell
-
-    https://louisabraham.github.io/domical/style.css
+    %% plugin
+    
+    {
+      "languageId": "ml",
+      "displayName": "OCaml",
+      "codeMirrorMode": "mllike",
+      "url": "https://louisabraham.github.io/domical/eval.js",
+      "module": "evaluator",
+      "evaluator": "execute",
+      "pluginType": "language"
+    }
 
 ## Build requirements
 
