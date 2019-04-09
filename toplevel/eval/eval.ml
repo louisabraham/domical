@@ -12,24 +12,57 @@ let () = begin
         (Stderr, s) :: !output_queue)
 end
 
+
+let replacements = [
+  '&', "&amp;";
+  '<', "&lt;";
+  '>', "&gt;"
+]
+
+let replace s (pattern, replacement) = 
+  String.concat replacement (String.split_on_char pattern s)
+
+let escape s =
+  List.fold_left replace s replacements
+
 let make_eval_el s = 
   String.concat "" [
-    "<span style=\"color: rgb(28, 0, 207);\">";
-    s;
-    "</span>"]
+    "<pre style=\"
+    display: block;
+    unicode-bidi: embed;
+    font-family: monospace;
+    white-space: pre;
+    color: #777777;
+    \">";
+    escape s;
+    "</pre>"]
 
 let make_out_el s = 
   String.concat "" [
-    "<span style=\"color: rgba(0, 0, 0, 0.6);\">";
-    s;
-    "</span>"
+    "<pre style=\"
+    display: block;
+    unicode-bidi: embed;
+    font-family: monospace;
+    white-space: pre;
+    overflow-x: auto;
+    \">";
+    escape s;
+    "</pre>"
   ]
 
 let make_err_el s = 
   String.concat "" [
-    "<span style=\"color: rgb(164,0,15); background-color: rgb(253,244,245);\">";
-    s;
-    "</span>"
+    "<pre style=\"
+    display: block;
+    unicode-bidi: embed;
+    font-family: monospace;
+    white-space: pre;  
+    background: #fff1f4;
+    color: #a41c1c;
+    overflow-x: auto;
+    \">";
+    escape s;
+    "</pre>"
   ]
 
 let output_element_to_string = function
